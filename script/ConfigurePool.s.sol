@@ -10,7 +10,13 @@ contract ConfigurePoolScript is Script {
         address localChain_burnMintTokenPoolAddress,
         uint64 remoteChain_chainSelector,
         address remoteChain_burnMintTokenPoolAddress,
-        address remoteChain_tokenAddress
+        address remoteChain_tokenAddress,
+        bool outboundRateLimiterIsEnabled,
+        uint128 outboundRateLimiterCapacity,
+        uint128 outboundRateLimiterRate,
+        bool inboundRateLimiterIsEnabled,
+        uint128 inboundRateLimiterCapacity,
+        uint128 inboundRateLimiterRate
     ) public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
@@ -23,8 +29,16 @@ contract ConfigurePoolScript is Script {
             allowed: true,
             remotePoolAddress: abi.encode(remoteChain_burnMintTokenPoolAddress),
             remoteTokenAddress: abi.encode(remoteChain_tokenAddress),
-            outboundRateLimiterConfig: RateLimiter.Config({isEnabled: true, capacity: 100_000, rate: 167}),
-            inboundRateLimiterConfig: RateLimiter.Config({isEnabled: true, capacity: 100_000, rate: 167})
+            outboundRateLimiterConfig: RateLimiter.Config({
+                isEnabled: outboundRateLimiterIsEnabled,
+                capacity: outboundRateLimiterCapacity,
+                rate: outboundRateLimiterRate
+            }),
+            inboundRateLimiterConfig: RateLimiter.Config({
+                isEnabled: inboundRateLimiterIsEnabled,
+                capacity: inboundRateLimiterCapacity,
+                rate: inboundRateLimiterRate
+            })
         });
 
         localChain_burnMintTokenPool.applyChainUpdates(chains);
