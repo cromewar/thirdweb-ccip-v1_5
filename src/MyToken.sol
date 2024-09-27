@@ -16,6 +16,8 @@ contract MyToken is IBurnMintERC20, ERC20Burnable, AccessControl {
 
     address internal s_CCIPAdmin;
 
+    event CCIPAdminSet(address indexed ccipAdmin);
+
     constructor() ERC20("MyToken", "MTK") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
@@ -49,5 +51,7 @@ contract MyToken is IBurnMintERC20, ERC20Burnable, AccessControl {
 
     function setCCIPAdmin(address ccipAdmin) external onlyRole(DEFAULT_ADMIN_ROLE) {
         s_CCIPAdmin = ccipAdmin;
+
+        emit CCIPAdminSet(ccipAdmin);
     }
 }
