@@ -7,9 +7,7 @@ remappings = ["@chainlink/local/=lib/chainlink-local/"]
 [rpc_endpoints]
 ethSepolia = "${ETHEREUM_SEPOLIA_RPC_URL}"
 baseSepolia = "${BASE_SEPOLIA_RPC_URL}"
-
-[etherscan]
-ethSepolia = { key = "${ETHEREUM_SEPOLIA_ETHERSCAN_API_KEY}" }
-baseSepolia = { key = "${BASE_SEPOLIA_ETHERSCAN_API_KEY}" }
+avalancheFuji = "${AVALANCHE_FUJI_RPC_URL}"
+arbitrumSepolia = "${ARBITRUM_SEPOLIA_RPC_URL}"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
