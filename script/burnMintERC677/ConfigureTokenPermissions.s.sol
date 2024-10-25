@@ -7,7 +7,7 @@ import {BurnMintTokenPool} from "@chainlink/contracts-ccip/src/v0.8/ccip/pools/B
 import {IBurnMintERC20} from "@chainlink/contracts-ccip/src/v0.8/shared/token/ERC20/IBurnMintERC20.sol";
 import {RegistryModuleOwnerCustom} from "@chainlink/contracts-ccip/src/v0.8/ccip/tokenAdminRegistry/RegistryModuleOwnerCustom.sol";
 import {TokenAdminRegistry} from "@chainlink/contracts-ccip/src/v0.8/ccip/tokenAdminRegistry/TokenAdminRegistry.sol";
-import {IBurnMintERC677} from "../../src/interface/IBurnMintERC677.sol";
+import {BurnMintERC677} from "../../src/BurnMintERC677.sol";
 
 contract DeployTokenAndPoolScript is Script {
     RegistryModuleOwnerCustom registryModuleOwnerCustom;
@@ -33,7 +33,7 @@ contract DeployTokenAndPoolScript is Script {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
-        IBurnMintERC677 myToken = IBurnMintERC677(address(tokenAddress));
+        BurnMintERC677 myToken = BurnMintERC677(address(tokenAddress));
 
         // Step 3) Grant Mint and Burn roles to BurnMintTokenPool
         myToken.grantMintAndBurnRoles(poolAddress);
